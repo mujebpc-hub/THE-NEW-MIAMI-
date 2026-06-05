@@ -1,1 +1,477 @@
+/* style.css - AAA-Quality Miami Neon Cyber City Theme */
 
+/* ===============================
+   GENERAL RESET & Layout
+   =============================== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  font-family: 'Orbitron', 'Arial', sans-serif;
+  background-color: #0d0d0d;
+  color: #fff;
+  overflow: hidden;
+}
+
+/* Smooth transitions for hover effects */
+body, button, input, select {
+  transition: all 0.3s ease;
+}
+
+/* ===============================
+   Loading Screen
+   =============================== */
+#loadingScreen {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: linear-gradient(135deg, #0d0d0d, #1a1a1a);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  opacity: 1;
+  transition: opacity 0.5s ease;
+}
+
+#loadingScreen.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+#loadingProgressContainer {
+  width: 80%;
+  max-width: 400px;
+  height: 12px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 6px;
+  overflow: hidden;
+  margin-top: 20px;
+  box-shadow: inset 0 0 10px #00f, inset 0 0 20px #f0f;
+}
+
+#loadingProgressBar {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #00f, #f0f);
+  border-radius: 6px 0 0 6px;
+  transition: width 0.3s ease;
+}
+
+/* ===============================
+   MAIN MENU
+   =============================== */
+#mainMenu {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 9000;
+  font-family: 'Orbitron', sans-serif;
+  padding: 20px;
+}
+
+#gameTitle {
+  font-size: 4em;
+  color: #ff00ff;
+  text-shadow: 0 0 10px #00f, 0 0 20px #f0f;
+  margin-bottom: 40px;
+  animation: neonPulse 1.5s infinite alternate;
+}
+
+@keyframes neonPulse {
+  from { text-shadow: 0 0 10px #00f, 0 0 20px #f0f; }
+  to { text-shadow: 0 0 20px #00f, 0 0 40px #f0f; }
+}
+
+.menuButtons {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 200px;
+}
+
+.menuButton {
+  padding: 15px;
+  font-size: 1.2em;
+  border: none;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.1);
+  color: #fff;
+  backdrop-filter: blur(10px);
+  cursor: pointer;
+  box-shadow: 0 0 10px #0ff, inset 0 0 10px #f0f;
+  transition: all 0.3s ease;
+}
+
+.menuButton:hover {
+  background: rgba(255,255,255,0.2);
+  box-shadow: 0 0 20px #0ff, inset 0 0 20px #f0f;
+  transform: scale(1.05);
+}
+
+/* Responsive adjustments */
+@media(max-width: 600px) {
+  #gameTitle {
+    font-size: 2.5em;
+  }
+  .menuButtons {
+    width: 150px;
+  }
+}
+
+/* ===============================
+   HUD
+   =============================== */
+#hud {
+  position: absolute;
+  top: 10px; left: 10px;
+  width: calc(100% - 20px);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  pointer-events: none;
+  z-index: 1000;
+  font-family: 'Orbitron', sans-serif;
+}
+
+/* Left HUD: health & armor */
+#hudLeft {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  pointer-events: auto;
+}
+
+.statusBarContainer {
+  position: relative;
+  width: 200px;
+  height: 20px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: inset 0 0 10px #00f, inset 0 0 20px #f0f;
+}
+
+.statusBar {
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(90deg, #00f, #0ff);
+  transition: width 0.3s ease;
+}
+
+#healthBar {
+  background: linear-gradient(90deg, #f00, #f80);
+}
+
+#armorBar {
+  background: linear-gradient(90deg, #0ff, #0f0);
+}
+
+/* Right HUD: money, wanted, mission, FPS, minimap */
+#hudRight {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+  pointer-events: auto;
+  min-width: 200px;
+}
+
+/* Money display */
+#moneyDisplay {
+  font-size: 1.4em;
+  color: #0ff;
+  text-shadow: 0 0 5px #0ff, 0 0 10px #0ff;
+  padding: 4px 8px;
+  background: rgba(0,0,0,0.3);
+  border-radius: 8px;
+  backdrop-filter: blur(5px);
+}
+
+/* Wanted stars */
+#wantedStars {
+  display: flex;
+  gap: 4px;
+}
+
+.star {
+  width: 24px;
+  height: 24px;
+  background: radial-gradient(circle, #ff0, #cc0);
+  clip-path: polygon(
+    50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%
+  );
+  box-shadow: 0 0 8px #ff0;
+  opacity: 0.7;
+}
+
+/* Mission text */
+#missionText {
+  font-size: 1em;
+  color: #fff;
+  background: rgba(255,255,255,0.1);
+  padding: 8px 12px;
+  border-radius: 8px;
+  max-width: 250px;
+  text-align: right;
+  box-shadow: 0 0 10px #f0f;
+}
+
+/* FPS counter */
+#fpsCounter {
+  font-family: 'Orbitron', monospace;
+  font-size: 1em;
+  color: #0ff;
+  padding: 4px 8px;
+  background: rgba(0,0,0,0.3);
+  border-radius: 8px;
+  box-shadow: 0 0 8px #0ff;
+}
+
+/* Minimap container */
+#minimapContainer {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 0 0 15px #0ff, inset 0 0 10px #00f;
+  border: 3px solid #0ff;
+  background: rgba(0,0,0,0.2);
+  backdrop-filter: blur(4px);
+  pointer-events: auto;
+}
+
+/* ===============================
+   MOBILE CONTROLS
+   =============================== */
+#mobileControls {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  right: 20px;
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+  pointer-events: none;
+  z-index: 1100;
+  padding: 10px;
+}
+
+/* Joystick area */
+#joystickArea {
+  width: 80px;
+  height: 80px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 50%;
+  box-shadow: 0 0 15px #0ff, inset 0 0 10px #00f;
+  pointer-events: auto;
+  touch-action: none;
+}
+
+/* Action buttons */
+.touchButton {
+  width: 60px;
+  height: 60px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 50%;
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5em;
+  color: #fff;
+  box-shadow: 0 0 15px #f0f, inset 0 0 10px #f0f;
+  cursor: pointer;
+  pointer-events: auto;
+  user-select: none;
+  transition: all 0.3s ease;
+}
+
+.touchButton:hover {
+  background: rgba(255,255,255,0.2);
+  box-shadow: 0 0 20px #f0f, inset 0 0 20px #f0f;
+  transform: scale(1.05);
+}
+
+/* Specific action buttons */
+#enterVehicleBtn, #jumpBtn, #sprintBtn {
+  font-size: 1.8em;
+}
+
+/* ===============================
+   NOTIFICATIONS
+   =============================== */
+#notificationContainer {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 300px;
+  max-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 1200;
+  pointer-events: none;
+}
+
+.notification {
+  background: rgba(0,0,0,0.8);
+  padding: 12px 20px;
+  border-radius: 8px;
+  color: #fff;
+  font-size: 1em;
+  box-shadow: 0 0 10px #0ff;
+  opacity: 0;
+  transform: translateY(-20px);
+  animation: slideIn 0.5s forwards, fadeOut 0.5s 2.5s forwards;
+  pointer-events: auto;
+}
+
+@keyframes slideIn {
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeOut {
+  to { opacity: 0; transform: translateY(-20px); }
+}
+
+/* Mission Complete & Reward Popups */
+.popup {
+  position: fixed;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%) scale(0.8);
+  background: linear-gradient(135deg, #0f0, #00f);
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 0 20px #0ff, inset 0 0 15px #00f;
+  font-family: 'Orbitron', sans-serif;
+  color: #fff;
+  z-index: 1300;
+  opacity: 0;
+  animation: popupFade 0.5s forwards;
+  min-width: 300px;
+  max-width: 90%;
+  text-align: center;
+}
+
+@keyframes popupFade {
+  from { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+  to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+
+.popup.show {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+/* Neon glow effect for buttons and screens */
+.neon-glow {
+  text-shadow: 0 0 10px #0ff, 0 0 20px #0ff, 0 0 30px #0ff;
+  box-shadow: 0 0 10px #0ff, 0 0 20px #0ff, 0 0 30px #0ff;
+}
+
+/* ===============================
+   GAME OVER SCREEN
+   =============================== */
+#gameOverScreen {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.95);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  z-index: 1400;
+  animation: fadeIn 1s forwards;
+  font-family: 'Orbitron', sans-serif;
+  padding: 20px;
+  color: #fff;
+  text-align: center;
+}
+
+#gameOverScreen.show {
+  opacity: 1;
+}
+
+#gameOverContent {
+  font-size: 3em;
+  margin-bottom: 30px;
+  text-shadow: 0 0 10px #f0f, 0 0 20px #f0f;
+}
+
+#gameOverButtons {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  max-width: 300px;
+  width: 100%;
+}
+
+#gameOverButtons button {
+  padding: 15px;
+  font-size: 1.2em;
+  border: none;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.2);
+  color: #fff;
+  cursor: pointer;
+  box-shadow: 0 0 10px #f0f, inset 0 0 10px #f0f;
+  transition: all 0.3s ease;
+}
+
+#gameOverButtons button:hover {
+  background: rgba(255,255,255,0.3);
+  box-shadow: 0 0 20px #f0f, inset 0 0 20px #f0f;
+  transform: scale(1.05);
+}
+
+/* ===============================
+   RESPONSIVE & MOBILE OPTIMIZATION
+   =============================== */
+@media(max-width: 768px) {
+  #gameTitle {
+    font-size: 2em;
+  }
+  #mainMenu {
+    padding: 10px;
+  }
+  #mainMenu h1 {
+    font-size: 2em;
+  }
+  #menuButtons {
+    width: 150px;
+  }
+  #hud {
+    flex-direction: column;
+    align-items: center;
+    top: auto; bottom: 10px; left: 50%; transform: translateX(-50%);
+  }
+  #hudLeft, #hudRight {
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+  }
+  #minimapContainer {
+    width: 100px; height: 100px;
+  }
+  #mobileControls {
+    flex-direction: column;
+    bottom: 10px;
+    gap: 10px;
+  }
+  .touchButton {
+    width: 60px; height: 60px; font-size: 1.5em;
+  }
+}
