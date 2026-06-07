@@ -1,46 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Rail Rush Runner</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Mato Runner</title>
+
+<link rel="stylesheet" href="style.css">
+
+<!-- Three.js -->
+<script src="https://cdn.jsdelivr.net/npm/three@0.165.0/build/three.min.js"></script>
 </head>
+
 <body>
-  <main class="game-shell">
-    <canvas id="gameCanvas" aria-label="Rail Rush Runner game"></canvas>
 
-    <section id="menu" class="panel menu-panel">
-      <p class="tour">World Tour</p>
-      <h1>Rail Rush<br>Runner</h1>
-      <p class="subtitle">Swipe or use arrow keys to dodge trains, grab coins, and chase a new high score.</p>
-      <button id="playButton" class="primary-btn">Play</button>
-      <div class="menu-stats">
-        <span>Best <strong id="bestScore">0</strong></span>
-        <span>Coins <strong id="bankCoins">0</strong></span>
-      </div>
-    </section>
+<!-- Loading Screen -->
+<div id="loadingScreen">
+    <h1>MATO RUNNER</h1>
+    <p>Loading...</p>
+</div>
 
-    <section id="hud" class="hud hidden">
-      <button id="pauseButton" class="icon-btn" aria-label="Pause">II</button>
-      <div class="score-box">
-        <span id="multiplier">x1</span>
-        <strong id="score">000000</strong>
-      </div>
-      <div class="coin-box">
-        <span class="coin-dot"></span>
-        <strong id="coins">0</strong>
-      </div>
-    </section>
+<!-- Main Menu -->
+<div id="menu">
+    <h1>MATO RUNNER</h1>
 
-    <section id="gameOver" class="panel over-panel hidden">
-      <h2>Run Over</h2>
-      <p>Score <strong id="finalScore">0</strong></p>
-      <p>Coins <strong id="finalCoins">0</strong></p>
-      <button id="restartButton" class="primary-btn">Run Again</button>
-    </section>
-  </main>
+    <button id="playBtn">PLAY</button>
+    <button id="howBtn">HOW TO PLAY</button>
+</div>
 
-  <script src="game.js"></script>
+<!-- Instructions -->
+<div id="howToPlay" class="hidden">
+    <h2>HOW TO PLAY</h2>
+
+    <p>⬅ Move Left</p>
+    <p>➡ Move Right</p>
+    <p>⬆ Jump</p>
+    <p>⬇ Slide</p>
+
+    <button id="backBtn">BACK</button>
+</div>
+
+<!-- HUD -->
+<div id="hud" class="hidden">
+
+    <div id="score">
+        Score: 0
+    </div>
+
+    <div id="coins">
+        Coins: 0
+    </div>
+
+</div>
+
+<!-- Game Over -->
+<div id="gameOver" class="hidden">
+
+    <h1>GAME OVER</h1>
+
+    <div id="finalScore">
+        Score: 0
+    </div>
+
+    <button id="restartBtn">
+        RESTART
+    </button>
+
+</div>
+
+<!-- Game Canvas -->
+<div id="gameContainer"></div>
+
+<script src="game.js"></script>
+
 </body>
 </html>
